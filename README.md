@@ -5,9 +5,9 @@ PhoneNumber is a tool to clean up the phone numbers in the Contacts.app of OS X.
 
 Special Thanks
 ============
-http://code.google.com/p/libphonenumber/
-https://github.com/daviddrysdale/python-phonenumbers
-http://mobilemacs.de/2013/02/mm104.html
+* http://code.google.com/p/libphonenumber/
+* https://github.com/daviddrysdale/python-phonenumbers
+* http://mobilemacs.de/2013/02/mm104.html
 
 
 MIT License
