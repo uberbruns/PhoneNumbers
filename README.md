@@ -10,7 +10,7 @@ Systems
 -------
 
 * OS X 10.7 (Not Tested)
-* OS X 10.8 (Tested)
+* OS X 10.8.2 (Tested)
 
 
 Special Thanks
