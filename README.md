@@ -2,6 +2,9 @@ PhoneNumbers
 ============
 PhoneNumber is a tool to clean up the phone numbers in the Contacts.app of OS X. Its a wrapper around python-phonenumbers/libphonenumber
 
+* OS X 10.7 (Not Tested)
+* OS X 10.7 (Tested)
+
 
 Special Thanks
 ============
