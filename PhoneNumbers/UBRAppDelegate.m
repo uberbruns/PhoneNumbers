@@ -38,10 +38,20 @@
     
     self = [super init];
     if (self) {
+		
+		// Init Instance Variables
         _records = nil;
         _libTaskController = [[UBRPhoneNumberTaskController alloc] init];
         _countryCodes = COUNTRY_CODES;
-        self.selectedCountryCode = [_countryCodes indexOfObject:@"DE"];
+        
+		// Set Default Country Code
+		NSString * localCountryCode = [[[NSLocale currentLocale] objectForKey:NSLocaleCountryCode] uppercaseString];
+		if ([_countryCodes indexOfObject:localCountryCode] != NSNotFound) {
+			self.selectedCountryCode = [_countryCodes indexOfObject:localCountryCode];
+		} else {
+			self.selectedCountryCode = [_countryCodes indexOfObject:@"US"];
+		}
+		
     }
     return self;
     
@@ -70,7 +80,7 @@
             
             ABMultiValue * phoneNumbers = [person valueForProperty:@"Phone"];
             
-            if (phoneNumbers && [phoneNumbers count] > 0) {
+            if (phoneNumbers && [phoneNumbers isKindOfClass:[ABMultiValue class]]) {
                 
                 for (NSUInteger i = 0; i < [phoneNumbers count]; i++) {
                     
@@ -80,7 +90,7 @@
                     UBRRecord * record = [[UBRRecord alloc] init];
                     record.currentPhoneNumber = phoneNumber;
                     record.abPerson = person;
-                    record.phoneIndex = i;
+                    record.phoneNumberIndex = i;
                     [_records addObject:record];
 
                 }
@@ -124,7 +134,7 @@
 
     [[_recordTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         if (idx < _records.count) {
-            [[_records objectAtIndex:idx] updateCurrentNumber];
+            [[_records objectAtIndex:idx] applyFormattedNumber];
         }
     }];
     

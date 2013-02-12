@@ -12,22 +12,23 @@
 
 
 
-- (void)updateCurrentNumber {
+- (void)applyFormattedNumber {
 
 
     ABMultiValue * oldNumbers = [self.abPerson valueForProperty:@"Phone"];
-    ABMutableMultiValue * newNumbers = [[ABMutableMultiValue alloc] init];
     
     
-    if (oldNumbers && [oldNumbers count] > 0) {
-        
+	if (oldNumbers && [oldNumbers isKindOfClass:[ABMultiValue class]]) {
+
+		ABMutableMultiValue * newNumbers = [[ABMutableMultiValue alloc] init];
+
         for (NSUInteger i = 0; i < [oldNumbers count]; i++) {
             
             id value = [oldNumbers valueAtIndex:i];
             NSString * oldIdentifier = [oldNumbers identifierAtIndex:i];
             NSString * label = [oldNumbers labelAtIndex:i];
             
-            if (i == self.phoneIndex) {
+            if (i == self.phoneNumberIndex) {
                 value = self.formattedPhoneNumber;
             }
                         
@@ -37,10 +38,10 @@
             }
             
         }
-        
+
+		[self.abPerson setValue:newNumbers forProperty:@"Phone"];
+
     }
-    
-    [self.abPerson setValue:newNumbers forProperty:@"Phone"];
 
 }
 

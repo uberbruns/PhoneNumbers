@@ -12,13 +12,13 @@
 @interface UBRRecord : NSObject
 
 
-- (void)updateCurrentNumber;
+- (void)applyFormattedNumber;
 
 
 @property (strong) NSString * title;
 @property (strong) NSString * currentPhoneNumber;
 @property (strong) NSString * formattedPhoneNumber;
 @property (strong, nonatomic) ABPerson * abPerson;
-@property () NSUInteger phoneIndex;
+@property () NSUInteger phoneNumberIndex;
 
 @end
