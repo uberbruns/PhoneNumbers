@@ -9,8 +9,8 @@ PhoneNumber is a tool to clean up the phone numbers in your OS X address book. B
 Systems
 -------
 
-* OS X 10.7 (Not Tested)
-* OS X 10.8.2 (Tested)
+* OS X 10.7
+* OS X 10.8.2
 
 
 Special Thanks
