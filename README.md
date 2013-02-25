@@ -2,8 +2,8 @@ PhoneNumbers
 ============
 PhoneNumber is a tool to clean up the phone numbers in your OS X address book. Basically it's just a GUI for python-phonenumbers/libphonenumber
 
-* Screenshot: https://s3-eu-west-1.amazonaws.com/me.bruns.downloads/apps/phonenumbers-screenshot.png
-* Downloads: https://s3-eu-west-1.amazonaws.com/me.bruns.downloads/apps/phonenumbers-latest.zip
+* Screenshot: http://downloads.bruns.me/apps/phonenumbers-screenshot.png
+* Download: http://downloads.bruns.me/apps/phonenumbers-latest.zip
 
 
 Systems
