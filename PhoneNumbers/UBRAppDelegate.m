@@ -85,13 +85,18 @@
                 for (NSUInteger i = 0; i < [phoneNumbers count]; i++) {
                     
                     NSString * phoneNumber = [NSString stringWithFormat:@"%@", [phoneNumbers valueAtIndex:i]];
-                    [_libTaskController addPhoneNumber:phoneNumber country:[_countryCodes objectAtIndex:self.selectedCountryCode]];
-                    
-                    UBRRecord * record = [[UBRRecord alloc] init];
-                    record.currentPhoneNumber = phoneNumber;
-                    record.abPerson = person;
-                    record.phoneNumberIndex = i;
-                    [_records addObject:record];
+					
+                    BOOL added = [_libTaskController addPhoneNumber:phoneNumber country:[_countryCodes objectAtIndex:self.selectedCountryCode]];
+					
+					if (added) {
+
+						UBRRecord * record = [[UBRRecord alloc] init];
+						record.currentPhoneNumber = phoneNumber;
+						record.abPerson = person;
+						record.phoneNumberIndex = i;
+						[_records addObject:record];
+					
+					}
 
                 }
                 

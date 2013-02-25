@@ -11,7 +11,7 @@
 
 @interface UBRPhoneNumberTaskController : UBRPythonTaskController
 
-- (void)addPhoneNumber:(NSString *)phoneNumber country:(NSString*)countrCode;
+- (BOOL)addPhoneNumber:(NSString *)phoneNumber country:(NSString*)countrCode;
 - (NSArray *)processPhoneNumbers;
 
 @end

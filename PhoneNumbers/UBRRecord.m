@@ -13,7 +13,10 @@
 
 
 - (void)applyFormattedNumber {
-
+	
+	if (!self.formattedPhoneNumber || self.formattedPhoneNumber.length < 3) {
+		return;
+	}
 
     ABMultiValue * oldNumbers = [self.abPerson valueForProperty:@"Phone"];
     

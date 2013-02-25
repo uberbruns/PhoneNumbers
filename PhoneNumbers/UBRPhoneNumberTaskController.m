@@ -30,10 +30,13 @@
 
 
 
-- (void)addPhoneNumber:(NSString *)phoneNumber country:(NSString*)countryCode {
-    
-    [_phoneNumbers addObject:@{@"number":phoneNumber, @"cc": countryCode}];
-    
+- (BOOL)addPhoneNumber:(NSString *)phoneNumber country:(NSString*)countryCode {
+	
+	phoneNumber = [phoneNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	[_phoneNumbers addObject:@{@"number":phoneNumber, @"cc": countryCode}];
+	return TRUE;
+	
+
 }
 
 
@@ -46,8 +49,15 @@
     
 	// Process Phone Numbers, Build Python Script
     for (NSDictionary * d in _phoneNumbers) {
-        [lines addObject:[NSString stringWithFormat:@"x = phonenumbers.parse(\"%@\", \"%@\")", d[@"number"], d[@"cc"]]];
-        [lines addObject:@"print phonenumbers.format_number(x, phonenumbers.PhoneNumberFormat.INTERNATIONAL)"];
+		[lines addObject:@"x = None"];
+        [lines addObject:[NSString stringWithFormat:@"for match in phonenumbers.PhoneNumberMatcher(\"%@\", \"%@\"):", d[@"number"], d[@"cc"]]];
+        [lines addObject:@"    x = match"];
+        [lines addObject:@"    break"];
+        [lines addObject:@"if x != None and phonenumbers.is_possible_number(x.number) and phonenumbers.is_valid_number(x.number):"];
+        [lines addObject:@"    print phonenumbers.format_number(x.number, phonenumbers.PhoneNumberFormat.INTERNATIONAL)"];
+		[lines addObject:@"else:"];
+        [lines addObject:@"    print \"--\""];
+
     }
     [_phoneNumbers removeAllObjects];
 
