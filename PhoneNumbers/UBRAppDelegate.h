@@ -17,6 +17,7 @@
 @property () NSUInteger selectedCountryCode;
 
 - (IBAction)updateSelectedRecords:(id)sender;
+- (IBAction)saveSelectedRecords:(id)sender;
 - (IBAction)updateSettings:(id)sender;
 - (IBAction)reloadRecords:(id)sender;
 

@@ -86,9 +86,6 @@
                     
                     NSString * phoneNumber = [NSString stringWithFormat:@"%@", [phoneNumbers valueAtIndex:i]];
 					
-                    BOOL added = [_libTaskController addPhoneNumber:phoneNumber country:[_countryCodes objectAtIndex:self.selectedCountryCode]];
-					
-					if (added) {
 
 						UBRRecord * record = [[UBRRecord alloc] init];
 						record.currentPhoneNumber = phoneNumber;
@@ -96,21 +93,12 @@
 						record.phoneNumberIndex = i;
 						[_records addObject:record];
 					
-					}
-
                 }
                 
             }
                         
         }
-        
-        NSArray * formattedPhoneNumbers = [_libTaskController processPhoneNumbers];
-        
-        for (NSUInteger i = 0; i < MIN(_records.count, formattedPhoneNumbers.count) ; i++) {
-            NSString * formattedPhoneNumber = [formattedPhoneNumbers objectAtIndex:i];
-            UBRRecord * record = [_records objectAtIndex:i];
-            record.formattedPhoneNumber = formattedPhoneNumber;
-        }
+
         
     }
     
@@ -139,13 +127,48 @@
 
     [[_recordTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
         if (idx < _records.count) {
-            [[_records objectAtIndex:idx] applyFormattedNumber];
+            [[_records objectAtIndex:idx] saveFormattedNumber];
         }
     }];
     
     [[ABAddressBook sharedAddressBook] save];
     [self update];
     
+}
+
+
+- (IBAction)saveSelectedRecords:(id)sender {
+	
+	NSMutableArray * addedRecords = [NSMutableArray array];
+	
+    [[_recordTableView selectedRowIndexes] enumerateIndexesUsingBlock:^(NSUInteger idx, BOOL *stop) {
+        if (idx < _records.count) {
+			
+			UBRRecord * record = [_records objectAtIndex:idx];
+			NSString * phoneNumber = record.currentPhoneNumber;
+			
+			BOOL added = [_libTaskController addPhoneNumber:phoneNumber country:[_countryCodes objectAtIndex:self.selectedCountryCode]];
+			if (added) {
+				[addedRecords addObject:@(idx)];
+//				NSLog(@"CURRENT NUMBER: %@", phoneNumber);
+			}
+			
+        }
+    }];
+	
+	
+	NSArray * formattedPhoneNumbers = [_libTaskController processPhoneNumbers];
+	
+	for (NSUInteger i = 0; i < MIN(addedRecords.count, formattedPhoneNumbers.count); i++) {
+		NSString * formattedPhoneNumber = [formattedPhoneNumbers objectAtIndex:i];
+		UBRRecord * record = [_records objectAtIndex:[addedRecords[i] integerValue]];
+		record.formattedPhoneNumber = formattedPhoneNumber;
+	}
+
+	[_recordTableView reloadData];
+	
+		
+	
 }
 
 

@@ -12,7 +12,7 @@
 
 
 
-- (void)applyFormattedNumber {
+- (void)saveFormattedNumber {
 	
 	if (!self.formattedPhoneNumber || self.formattedPhoneNumber.length < 3) {
 		return;

@@ -39,6 +39,9 @@
     NSString * pythonCode = [lines componentsJoinedByString:@"\n"];
     NSPipe * stdInPipe = [NSPipe pipe];
     NSPipe * stdOutPipe = [NSPipe pipe];
+	
+//	NSLog(@"PYTHON INPUT:");
+//	NSLog(@"%@", pythonCode);
     
     NSTask * task = [[NSTask alloc] init];
     task.launchPath = @"/usr/bin/python";
@@ -52,6 +55,10 @@
     
     NSData * data = [[stdOutPipe fileHandleForReading] readDataToEndOfFile];
     NSString * string = [[NSString alloc] initWithBytes: data.bytes length:data.length encoding: NSUTF8StringEncoding];
+	
+//	NSLog(@"PYTHON OUTPUT:");
+//	NSLog(@"%@", string);
+
 	
     return string;
     

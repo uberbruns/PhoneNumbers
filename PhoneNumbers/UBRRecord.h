@@ -12,7 +12,7 @@
 @interface UBRRecord : NSObject
 
 
-- (void)applyFormattedNumber;
+- (void)saveFormattedNumber;
 
 
 @property (strong) NSString * title;
