@@ -39,10 +39,7 @@
     NSString * pythonCode = [lines componentsJoinedByString:@"\n"];
     NSPipe * stdInPipe = [NSPipe pipe];
     NSPipe * stdOutPipe = [NSPipe pipe];
-	
-//	NSLog(@"PYTHON INPUT:");
-//	NSLog(@"%@", pythonCode);
-    
+	   
     NSTask * task = [[NSTask alloc] init];
     task.launchPath = @"/usr/bin/python";
     task.currentDirectoryPath = _libPath;
@@ -58,7 +55,6 @@
 	
 //	NSLog(@"PYTHON OUTPUT:");
 //	NSLog(@"%@", string);
-
 	
     return string;
     

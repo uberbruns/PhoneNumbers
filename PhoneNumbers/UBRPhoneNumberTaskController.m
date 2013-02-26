@@ -32,8 +32,8 @@
 
 - (BOOL)addPhoneNumber:(NSString *)phoneNumber country:(NSString*)countryCode {
 	
-	phoneNumber = [phoneNumber stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-	[_phoneNumbers addObject:@{@"number":phoneNumber, @"cc": countryCode}];
+	NSArray * phoneNumberComponent = [phoneNumber componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	[_phoneNumbers addObject:@{@"number":[phoneNumberComponent componentsJoinedByString:@""], @"cc": countryCode}];
 	return TRUE;
 	
 
@@ -42,6 +42,10 @@
 
 
 - (NSArray *)processPhoneNumbers {
+
+//	NSLog(@"INPUT:");
+//	NSLog(@"%@", _phoneNumbers);
+
     
 	// Import Python Lib
     NSMutableArray * lines = [NSMutableArray array];
