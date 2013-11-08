@@ -66,8 +66,12 @@
     [_phoneNumbers removeAllObjects];
 
 	// Execute Python and Return
-    NSString * results = [self executePython:lines];
-    return [results componentsSeparatedByString:@"\n"];
+    NSString * resultString = [self executePython:lines];
+	if (resultString) {
+		return [resultString componentsSeparatedByString:@"\n"];
+	} else {
+		return @[];
+	}
     
 }
 
